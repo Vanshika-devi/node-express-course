@@ -1,12 +1,16 @@
-const http = require('http')
+const http=require('http');
+const {readFileSync}=require('fs');
+//get all files
+const homepage=readFileSync('./index.html')
 
-const server = http.createServer((req, res) => {
-  // console.log(req.method)
+
+const server=http.createServer((req,res)=>{
+// console.log(req.method)
   const url = req.url
   // home page
   if (url === '/') {
     res.writeHead(200, { 'content-type': 'text/html' })//status code first argumentb second content type
-    res.write('<h1>home page</h1>')
+    res.write(homepage)
     res.end()
   }
   // about page
@@ -22,9 +26,4 @@ const server = http.createServer((req, res) => {
     res.end()
   }//mozerlla for http
 })
-//200 status code means the content is being already found 404 means content not found 
 server.listen(5000)
-//200 acceptable response
-//201 
-//400 bad requuest
-//404 not found 
